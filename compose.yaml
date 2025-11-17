@@ -1,0 +1,36 @@
+services:
+  mongodb:
+    image: mongo:5.0.15
+    container_name: mongodb-app
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    restart: unless-stopped
+    ports:
+      - 27018:27017
+    expose:
+      - 27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 8080
+      MONGO_DB_URL: mongodb://root:123456@mongodb:27017/todo-app?authSource=admin
+      JWT_SECRET: 4fc0f7b3-87cd-4683-b662-2c3e32302a6d
+      JWT_EXPIRE: 7d
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data_container:
+
+    #docker compose -p portal-container up --build -d
