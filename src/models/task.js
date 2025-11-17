@@ -8,15 +8,9 @@ const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         require: true
-    },
-    createAt: {
-        type: Date,
-        default: Date.now()
-    },
-    updateAt: {
-        type: Date,
-        default: Date.now()
     }
+}, {
+    timestamps: true 
 })
 
 const Task = mongoose.model('task', taskSchema)

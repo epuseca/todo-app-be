@@ -24,7 +24,7 @@ const createTask = async (req, res) => {
 
 const getAllTask = async (req, res) => {
     try {
-        const { limit = 10, page = 1, search, sort = '-createAt', filter } = req.query
+        const { limit = 10, page = 1, search, sort = '-createdAt', filter } = req.query
         const query = {}
 
         if (search) {
