@@ -1,6 +1,5 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-require('dotenv').config();
 const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken, refreshTokenJwtService } = require('../services/JwtService');
 
